@@ -10,6 +10,7 @@ def send_confirmation_code(to_number, code):
     to_number = "{}{}".format("+91", to_number)
     send_sms(to_number, verification_code)
 
+
 def generate_code():
     return str(random.randrange(1000, 9999))
 

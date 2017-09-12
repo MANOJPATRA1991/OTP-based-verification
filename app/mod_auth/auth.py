@@ -28,9 +28,10 @@ def sms_verification():
                 new_user = create_mobile_user(mobile_no)
                 session.add(new_user)
                 session.commit()
-                print(new_user)
+                print(new_user.mobile_no)
                 send_confirmation_code(new_user.mobile_no, new_user.otp)
             elif user is not None and not user.is_verified:
+                print(user.mobile_no)
                 user.otp = generate_code()
                 session.add(user)
                 session.commit()
@@ -46,8 +47,8 @@ def sms_verification():
 @mod_auth.route('/mobile_otp_verification', methods=['GET', 'POST'])
 def verify_user():
     if request.method == 'POST':
-        mobile_no = request.args.get('mobile')
-        otp = request.args.get('otp')
+        mobile_no = int(request.form.get('mobile'))
+        otp = int(request.form.get('otp'))
         user = session.query(User).filter_by(mobile_no=mobile_no).first()
         if user is not None and not user.is_verified:
             if user.otp == otp:
@@ -60,7 +61,6 @@ def verify_user():
                 response.headers['Content-Type'] = 'application/json'
                 return response
             else:
-                print("A")
                 response = make_response(json.dumps(
                     "Mobile number not Verified, Retry"), 200)
                 response.headers['Content-Type'] = 'application/json'
@@ -71,6 +71,7 @@ def verify_user():
             response.headers['Content-Type'] = 'application/json'
             return response
         else:
+            type(user.otp)
             response = make_response(json.dumps(
                 "Mobile number not Verified, Retry"), 200)
             response.headers['Content-Type'] = 'application/json'
