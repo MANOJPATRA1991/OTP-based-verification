@@ -1,5 +1,5 @@
 from sqlalchemy import (Column, BigInteger, Integer,
-                        String, Boolean, DateTime)
+                        Boolean, DateTime)
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
@@ -8,6 +8,9 @@ Base = declarative_base()
 
 
 class User(Base):
+    """
+    User class to create users in the database
+    """
     __tablename__ = 'mobileusers'
 
     id = Column(Integer, primary_key=True)
@@ -16,6 +19,7 @@ class User(Base):
     is_verified = Column(Boolean, default=False)
     created_at = Column(DateTime, nullable=True)
     updated_at = Column(DateTime, nullable=True)
+
 
 engine = create_engine('postgresql://dbuser:users@localhost/mobileusers')
 
