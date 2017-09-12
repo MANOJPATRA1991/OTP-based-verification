@@ -6,10 +6,10 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 	</head>
 	<body>
-        <form method="post" action="{{ url_for('auth.email_verification') }}">
-            <label>Enter email address</label>
-            <input type="email" name="email">
-            <button type="submit">Send Link</button>
+        <form method="post" action="{{ url_for('auth.sms_verification') }}">
+            <label>Enter 10-digit mobile number</label>
+            <input type="text" name="mobile">
+            <button type="submit">Send OTP</button>
         </form>
     </body>
 </html>

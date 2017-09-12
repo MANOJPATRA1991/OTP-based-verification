@@ -1,6 +1,7 @@
 from flask import Flask
 import string
 import random
+# from config import TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_NUMBER
 
 app = Flask(__name__)
 
@@ -11,4 +12,6 @@ secret_key = ''.join(random.choice(
 
 app.register_blueprint(mod_auth)
 
-app.config['SECRET_KEY'] = secret_key
+app.config.from_object('config.Config')
+
+# app.config['SECRET_KEY'] = secret_key
