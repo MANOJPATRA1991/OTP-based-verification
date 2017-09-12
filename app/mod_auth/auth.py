@@ -34,11 +34,9 @@ def sms_verification():
                 new_user = helper.create_mobile_user(mobile_no)
                 session.add(new_user)
                 session.commit()
-                print(new_user.mobile_no)
                 helper.send_confirmation_code(new_user.mobile_no, new_user.otp)
             # If user is not verified
             elif user is not None and not user.is_verified:
-                print(user.mobile_no)
                 user.otp = helper.generate_code()
                 session.add(user)
                 session.commit()
